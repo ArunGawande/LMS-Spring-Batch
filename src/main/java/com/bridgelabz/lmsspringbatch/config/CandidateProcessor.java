@@ -7,10 +7,10 @@ public class CandidateProcessor implements ItemProcessor<Candidates, Candidates>
 
     @Override
     public Candidates process(Candidates candidates) throws Exception {
-        if (candidates.getCandidateStatus().equals("complete")) {
+      //  if (candidates.getCandidateStatus().equals("complete")) {
             return candidates;
-        } else {
-            return null;
-        }
+      //  } else {
+       //     return null;
+       // }
     }
 }

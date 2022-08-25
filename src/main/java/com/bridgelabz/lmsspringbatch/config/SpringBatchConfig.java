@@ -29,13 +29,13 @@ public class SpringBatchConfig {
 
     private StepBuilderFactory stepBuilderFactory;
 
-    private CandidatesRepository customerRepository;
+    private CandidatesRepository candidatesRepository;
 
 
     @Bean
     public FlatFileItemReader<Candidates> reader() {
         FlatFileItemReader<Candidates> itemReader = new FlatFileItemReader<>();
-        itemReader.setResource(new FileSystemResource("D:\\SpringBootProject\\LMS-Spring-Batch\\src\\main\\resources\\candidates.csv"));
+        itemReader.setResource(new FileSystemResource("src/main/resources/candidates.csv"));
         itemReader.setName("csvReader");
         itemReader.setLinesToSkip(1);
         itemReader.setLineMapper(lineMapper());
@@ -48,7 +48,7 @@ public class SpringBatchConfig {
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
-        lineTokenizer.setNames("id", "cicId", "fullName", "email", "mobileNum", "hiredDate", "degree", "aggregatePercentage", "city", "state", "preferredJobLocation", "status", "passedOutYear", "candidateStatus");
+        lineTokenizer.setNames("id", "cicId", "fullName", "email", "mobileNum", "hiredDate", "degree", "aggrPer", "city", "state", "preferredJobLocation", "status", "passedOutYear", "candidateStatus");
 
         BeanWrapperFieldSetMapper<Candidates> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(Candidates.class);
@@ -67,7 +67,7 @@ public class SpringBatchConfig {
     @Bean
     public RepositoryItemWriter<Candidates> writer() {
         RepositoryItemWriter<Candidates> writer = new RepositoryItemWriter<>();
-        writer.setRepository(customerRepository);
+        writer.setRepository(candidatesRepository);
         writer.setMethodName("save");
         return writer;
     }
